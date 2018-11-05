@@ -33,6 +33,7 @@ module.exports = function esTemplates(options = {}) {
 
       file.contents = new Buffer(renderPageTemplate(context));
     } catch (error) {
+      console.error(error);
       this.emit('error', new gutil.PluginError('es-templates', error));
     }
 
