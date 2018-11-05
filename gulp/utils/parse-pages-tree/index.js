@@ -17,19 +17,22 @@ function getChildrenSlugs(pagePath) {
     .filter((slug) => isDirectory(path.join(pagePath, slug)));
 }
 
-function getChildren(pagePath) {
+function getChildren(pagePath, url) {
   return new Map(
     getChildrenSlugs(pagePath).map((slug) => {
-      return [slug, parsePagesTree(path.join(pagePath, slug))];
+      const pageUrl = `${url === '/' ? '' : url}/${slug}`;
+
+      return [slug, parsePagesTree(path.join(pagePath, slug), pageUrl)];
     }),
   );
 }
 
-function parsePagesTree(rootPath) {
+function parsePagesTree(rootPath, url = '/') {
   const metadata = getMetadata(rootPath);
-  const children = getChildren(rootPath);
+  const children = getChildren(rootPath, url);
 
   return {
+    url,
     metadata,
     children,
     get(relativeUrl) {
