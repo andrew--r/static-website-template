@@ -4,5 +4,5 @@ const gulp = require('gulp');
 requireDir('./gulp/tasks', { recurse: true });
 
 gulp.task('default', (done) => {
-  gulp.series('clean', gulp.parallel('styles'), 'markup')(done);
+  gulp.series('clean', gulp.parallel('assets', 'styles'), 'markup')(done);
 });

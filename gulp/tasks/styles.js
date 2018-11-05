@@ -21,11 +21,13 @@ gulp.task('styles', () => {
         path.dirname = path.dirname.replace(/^pages\/?/, '');
       }),
     )
-    .pipe(gulp.dest('./build'))
+    .pipe(gulp.dest(config.paths.build))
     .pipe(
       rev.manifest({
+        base: config.paths.build,
+        path: `${config.paths.build}/rev-manifest.json`,
         merge: true,
       }),
     )
-    .pipe(gulp.dest('./build'));
+    .pipe(gulp.dest(config.paths.build));
 });

@@ -18,7 +18,6 @@ gulp.task('markup', () => {
           pagesTree,
           currentPage: pagesTree.get(pagePath),
           getLocalAssetUrl: (relativeAssetPath) => {
-            console.log(path.join(pagePath, relativeAssetPath));
             return `/${revManifest[path.join(pagePath, relativeAssetPath)]}`;
           },
           getAssetUrl: (assetPath) =>
