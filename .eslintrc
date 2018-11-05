@@ -1,5 +1,5 @@
 {
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": ["eslint:recommended", "plugin:import/errors", "prettier"],
   "env": {
     "es6": true,
     "node": true
@@ -26,6 +26,13 @@
       }
     ],
     "arrow-parens": ["error", "always"],
-    "no-shadow": 2
+    "no-shadow": 2,
+
+    "import/no-unresolved": [
+      "error",
+      {
+        "commonjs": true
+      }
+    ]
   }
 }
