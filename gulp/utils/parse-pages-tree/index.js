@@ -36,6 +36,10 @@ function parsePagesTree(rootPath, url = '/') {
     metadata,
     children,
     get(relativeUrl) {
+      if (['', '/'].includes(relativeUrl)) {
+        return this;
+      }
+
       return relativeUrl.split('/').reduce((result, pageSlug) => {
         return result.children.get(pageSlug);
       }, this);
