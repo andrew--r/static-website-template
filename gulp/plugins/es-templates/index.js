@@ -20,10 +20,18 @@ module.exports = function esTemplates(options = {}) {
     }
 
     try {
-      const renderTemplate = require(file.path);
-      file.contents = new Buffer(
-        renderTemplate({ context: options.context || {} }),
-      );
+      const renderPageTemplate = require(file.path);
+
+      file.basename = 'index.html';
+
+      const pagePath = file.relative.replace(/\/?index\.html$/, '');
+      let context = {};
+
+      if (typeof options.getContext === 'function') {
+        context = options.getContext(pagePath);
+      }
+
+      file.contents = new Buffer(renderPageTemplate(context));
     } catch (error) {
       this.emit('error', new gutil.PluginError('es-templates', error));
     }

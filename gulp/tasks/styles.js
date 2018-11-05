@@ -18,7 +18,7 @@ gulp.task('styles', () => {
     .pipe(rev())
     .pipe(
       rename((path) => {
-        path.dirname = path.dirname.replace(/^pages\//, '');
+        path.dirname = path.dirname.replace(/^pages\/?/, '');
       }),
     )
     .pipe(gulp.dest('./build'))

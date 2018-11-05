@@ -1,4 +1,4 @@
-module.exports = ({ context, children }) => `
+module.exports = (context, children) => `
 <!DOCTYPE html>
 <html lang="en">
 
