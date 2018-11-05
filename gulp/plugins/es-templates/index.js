@@ -1,8 +1,5 @@
 const gutil = require('gulp-util');
 const through = require('through2');
-const fs = require('fs');
-const extend = require('util')._extend;
-const path = require('path');
 
 module.exports = function esTemplates(options = {}) {
   return through.obj(function(file, encoding, callback) {

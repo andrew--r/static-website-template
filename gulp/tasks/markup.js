@@ -1,6 +1,5 @@
 const path = require('path');
 const gulp = require('gulp');
-const rename = require('gulp-rename');
 const htmlmin = require('gulp-htmlmin');
 const config = require('../../build.config');
 const esTemplates = require('../plugins/es-templates');

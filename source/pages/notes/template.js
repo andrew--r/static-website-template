@@ -1,5 +1,3 @@
-const fs = require('fs');
-const path = require('path');
 const layout = require('../../partials/layout/template');
 
 const renderNotesList = (currentPage) => {
