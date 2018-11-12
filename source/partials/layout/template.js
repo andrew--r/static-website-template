@@ -1,31 +1,19 @@
-module.exports = (context, children) => `
+const renderHead = require('./head/template');
+const renderHeader = require('./header/template');
+const renderFooter = require('./footer/template');
+
+module.exports = (context, children, { headContent } = {}) => `
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>${context.title || ''}</title>
-  <link rel="icon" type="image/png" href="${context.getAssetUrl(
-    'favicon.png',
-  )}"/>
-  <link rel="stylesheet" href="${context.getAssetUrl('main.css')}"/>
-</head>
-
+<html lang="${context.siteData.lang}">
+${renderHead(context, headContent)}
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="/">Index</a></li>
-        <li><a href="/notes">Notes</a></li>
-      </ul>
-    </nav>
-  </header>
+  ${renderHeader(context)}
 
   <main>
     ${children}
   </main>
+
+  ${renderFooter(context)}
 </body>
 </html>
 `;

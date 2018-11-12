@@ -1,20 +1,27 @@
 const fs = require('fs');
 const path = require('path');
+const config = require('../../../build.config');
 
 const isDirectory = (source) => fs.lstatSync(source).isDirectory();
 
 function getMetadata(pagePath) {
-  try {
-    return require(path.join(pagePath, 'metadata.js'));
-  } catch (error) {
-    return {};
+  const metadataPath = path.join(pagePath, 'metadata.js');
+
+  if (fs.existsSync(metadataPath)) {
+    return require(metadataPath);
   }
+
+  return {};
 }
 
 function getChildrenSlugs(pagePath) {
   return fs
     .readdirSync(pagePath)
-    .filter((slug) => isDirectory(path.join(pagePath, slug)));
+    .filter(
+      (slug) =>
+        slug !== config.localAssetsDirName &&
+        isDirectory(path.join(pagePath, slug)),
+    );
 }
 
 function getChildren(pagePath, url) {
@@ -33,6 +40,7 @@ function parsePagesTree(rootPath, url = '/') {
 
   return {
     url,
+    path: url.replace(/^\//, ''),
     metadata,
     children,
     get(relativeUrl) {

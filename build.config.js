@@ -5,4 +5,5 @@ module.exports = {
     source: path.resolve(__dirname, './source'),
     build: path.resolve(__dirname, './build'),
   },
+  localAssetsDirName: '_assets',
 };

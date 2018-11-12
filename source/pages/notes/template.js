@@ -14,12 +14,16 @@ const renderNotesList = (currentPage) => {
     .join('');
 };
 
-const renderPage = ({ currentPage, getLocalAssetUrl }) => `
-<link rel="stylesheet" href="${getLocalAssetUrl('notes.css')}"/>
-<h1>Notes</h1>
+const renderPage = (context) => `
+<h2>Notes</h2>
 <ul>
-  ${renderNotesList(currentPage)}
+  ${renderNotesList(context.currentPage)}
 </ul>
 `;
 
-module.exports = (context) => layout(context, renderPage(context));
+module.exports = (context) =>
+  layout(context, renderPage(context), {
+    headContent: `<link rel="stylesheet" href="${context.getPageAssetUrl(
+      'style.css',
+    )}" />`,
+  });
