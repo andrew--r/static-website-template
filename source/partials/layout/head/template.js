@@ -2,8 +2,16 @@ module.exports = (
   { currentPage, siteData, getAssetUrl, getAbsoluteUrl },
   content = '',
 ) => {
-  const title = currentPage.metadata.title || siteData.title;
-  const description = currentPage.metadata.title || siteData.description;
+  let title;
+  let description;
+
+  if (currentPage.metadata.title) {
+    title = currentPage.metadata.title || '';
+    description = currentPage.metadata.description || '';
+  } else {
+    title = siteData.title || '';
+    description = siteData.description || '';
+  }
 
   return `
   <head>
